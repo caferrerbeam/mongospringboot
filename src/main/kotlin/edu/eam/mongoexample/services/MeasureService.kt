@@ -34,7 +34,6 @@ class MeasureService {
         if (measureValue > channel.max && measureValue < channel.min)
             throw BusinessException("measure value not in range")
 
-
         measureRepository.save(measure)
     }
 

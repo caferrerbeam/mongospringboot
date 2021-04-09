@@ -12,7 +12,7 @@ class SensorControllerTest: CommonTests() {
 
     @Test
     fun findSensorTest() {
-        fillCollection("sensors", "/data/findSensor.json")
+        fillCollection("sensors", "/data/sensorControllerTest/findSensor.json")
 
         val request = MockMvcRequestBuilders.get("/sensors/1234")
             .contentType(MediaType.APPLICATION_JSON)
@@ -59,8 +59,8 @@ class SensorControllerTest: CommonTests() {
 
     @Test
     fun getMeasuresBySensorIdAndChannelId() {
-        fillCollection("sensors", "/data/getMeasuresBySensorIdAndChannelId_sensors.json")
-        fillCollection("measures", "/data/getMeasuresBySensorIdAndChannelId_measures.json")
+        fillCollection("sensors", "/data/sensorControllerTest/getMeasuresBySensorIdAndChannelId_sensors.json")
+        fillCollection("measures", "/data/sensorControllerTest/getMeasuresBySensorIdAndChannelId_measures.json")
 
         val request = MockMvcRequestBuilders.get("/sensors/{sensorId}/channels/{channelNumber}/measures",1234, 0)
             .contentType(MediaType.APPLICATION_JSON)
@@ -73,7 +73,7 @@ class SensorControllerTest: CommonTests() {
 
     @Test
     fun addChannelToSensorTest() {
-        fillCollection("sensors", "/data/addChannelToSensorTest.json")
+        fillCollection("sensors", "/data/sensorControllerTest/addChannelToSensorTest.json")
 
         val sensorId = "1234"
         val body = """{
