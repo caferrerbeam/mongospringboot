@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "606c5d3def274e2f25d760b0"
+  },
+  "sensorId": "1234",
+  "channelNumber": 0,
+  "measure": 1,
+  "takenAt": {
+    "$date": "2021-04-06T13:08:13.369Z"
+  },
+  "_class": "edu.eam.mongoexample.model.Measure"
+},{
+  "_id": {
+    "$oid": "606f604a0a435d66a8c101fc"
+  },
+  "sensorId": "1234",
+  "channelNumber": 0,
+  "measure": 1,
+  "takenAt": {
+    "$date": "2021-04-08T19:58:02.741Z"
+  },
+  "_class": "edu.eam.mongoexample.model.Measure"
+},{
+  "_id": {
+    "$oid": "606f6406b2b75334d29479a8"
+  },
+  "sensorId": "1234",
+  "channelNumber": 0,
+  "measure": 1,
+  "takenAt": {
+    "$date": "2021-04-08T20:13:58.049Z"
+  },
+  "_class": "edu.eam.mongoexample.model.Measure"
+}]

@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "1234",
+    "name": "humedad",
+    "channels": [
+      {
+        "max": 5.0,
+        "min": 0.0,
+        "number": 0
+      },
+      {
+        "max": 5.0,
+        "min": -5.0,
+        "number": 1
+      }
+    ]
+  }
+]

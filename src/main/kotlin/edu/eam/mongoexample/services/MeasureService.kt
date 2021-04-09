@@ -31,14 +31,16 @@ class MeasureService {
         val channel = if (channelNumber < sensor.channels.size) sensor.channels[channelNumber]
         else throw BusinessException("channel not found")
 
-        if (measureValue> channel.max && measureValue < channel.min)
+        if (measureValue > channel.max && measureValue < channel.min)
             throw BusinessException("measure value not in range")
+
 
         measureRepository.save(measure)
     }
 
-    fun measuresBySensorAndChannel(sensorId: String, channelNumber: Int, pageable: org.springframework.data.domain.Pageable) =
-        measureRepository.findBySensorIdAndChannelNumber(sensorId, channelNumber, pageable)
+
+    fun measuresBySensorAndChannel(sensorId: String, channelNumber: Int) =
+        measureRepository.findBySensorIdAndChannelNumber(sensorId, channelNumber)
 
     fun measuresBySensorAndDates(sensorId: String, from: Date, to: Date, pageable: Pageable) =
         measureRepository.findSensorMeasuresBetweenDates(sensorId, from, to, pageable)

@@ -1,10 +1,11 @@
 package edu.eam.mongoexample.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.format.annotation.DateTimeFormat
+import java.time.LocalTime
 import java.util.Date
-import java.util.UUID
 
 @Document(collection = "measures")
 data class Measure (
