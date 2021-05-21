@@ -3,6 +3,7 @@ package edu.eam.mongoexample.controllers
 import edu.eam.mongoexample.configs.Constans
 import edu.eam.mongoexample.model.Channel
 import edu.eam.mongoexample.model.Sensor
+import edu.eam.mongoexample.security.Secured
 import edu.eam.mongoexample.services.MeasureService
 import edu.eam.mongoexample.services.SensorService
 import org.springframework.beans.factory.annotation.Autowired
@@ -31,6 +32,7 @@ class SensorController {
     @PostMapping
     fun create(@RequestBody sensor: Sensor) = sensorService.createSensor(sensor)
 
+    @Secured(permissions = ["admin"])
     @GetMapping("/{sensorId}")
     fun findSensor(@PathVariable sensorId: String) = sensorService.findSensor(sensorId)
 

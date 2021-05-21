@@ -2,6 +2,7 @@ package edu.eam.mongoexample.controllers
 
 import edu.eam.mongoexample.model.Measure
 import edu.eam.mongoexample.model.Sensor
+import edu.eam.mongoexample.security.Secured
 import edu.eam.mongoexample.services.MeasureService
 import edu.eam.mongoexample.services.SensorService
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,7 +18,7 @@ class MeasureController {
     @Autowired
     lateinit var measureService: MeasureService
 
+    @Secured(permissions = ["admin"])
     @PostMapping
     fun create(@RequestBody measure: Measure) = measureService.createMeasure(measure)
-
 }

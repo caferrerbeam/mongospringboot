@@ -13,6 +13,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -24,6 +25,13 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2020.0.1")
+	}
 }
 
 tasks.withType<KotlinCompile> {
