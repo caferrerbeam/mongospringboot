@@ -1,6 +1,7 @@
 package edu.eam.mongoexample.controllers
 
 import edu.eam.mongoexample.configs.Constans
+import edu.eam.mongoexample.configs.Permission
 import edu.eam.mongoexample.model.Channel
 import edu.eam.mongoexample.model.Sensor
 import edu.eam.mongoexample.security.Secured
@@ -29,13 +30,16 @@ class SensorController {
     @Autowired
     lateinit var measureService: MeasureService
 
+    @Secured(permissions = [Permission.ADMIN_SENSOR_PERMISSION])
     @PostMapping
     fun create(@RequestBody sensor: Sensor) = sensorService.createSensor(sensor)
 
-    @Secured(permissions = ["admin"])
+    @Secured
     @GetMapping("/{sensorId}")
     fun findSensor(@PathVariable sensorId: String) = sensorService.findSensor(sensorId)
 
+
+    @Secured(permissions = [Permission.ADMIN_SENSOR_PERMISSION])
     @PutMapping("/{sensorId}/channels")
     fun addChannel(@PathVariable sensorId: String, @RequestBody channel: Channel) =
         sensorService.addChannel(sensorId, channel)

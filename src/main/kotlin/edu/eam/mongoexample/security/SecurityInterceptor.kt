@@ -1,12 +1,11 @@
 package edu.eam.mongoexample.security
+
 import edu.eam.mongoexample.security.authclient.SecurityService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.method.HandlerMethod
 import org.springframework.web.servlet.HandlerInterceptor
 import org.springframework.web.servlet.ModelAndView
-import java.lang.Exception
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -18,35 +17,39 @@ class SecurityInterceptor : HandlerInterceptor {
 
     @Throws(Exception::class)
     fun getToken(request: HttpServletRequest): String {
-        val bearer = request.getHeader("Authorization")?: throw SecurityException("token required")
+        val bearer = request.getHeader("Authorization") ?: throw SecurityException("token required")
 
         if (!bearer.startsWith(prefix = "Bearer ")) {
             throw SecurityException("invalid token")
         }
 
-        val token = bearer.substring(7);
-        return token;
+        return bearer.substring(7)
     }
 
     @Throws(Exception::class)
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         if (handler is HandlerMethod) {
-            val filter: Secured? = handler.method.getAnnotation(Secured::class.java)
+            //extrayendo del handler la anotacion secured.
+            val securityInfo: Secured = handler.method.getAnnotation(Secured::class.java) ?: return true
 
-            if (filter != null) {
+            if (securityInfo!=null) {
+                //si el flujo del codigo llego hasta aca, es porque el handler esta anotado con secured
                 val token = getToken(request)
 
                 val securityPayload = securityService.validateToken(token)
-                val userPermissions = securityPayload.permissions;
+                val userPermissions = securityPayload.permissions
 
-                val handlerPermissions = filter.permissions
+                val handlerPermissions = securityInfo.permissions
 
-                if (handlerPermissions.isNotEmpty() && handlerPermissions.intersect(userPermissions).isEmpty()) {
+                if (handlerPermissions.isEmpty()) {
+                    return true;
+                }
+
+                if (handlerPermissions.intersect(userPermissions).isEmpty()) {
                     throw SecurityException("this user has no access")
                 }
             }
 
-            return true
         }
         return true
     }

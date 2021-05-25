@@ -26,6 +26,8 @@ class MeasuresControllerTest: CommonTests() {
         val request = MockMvcRequestBuilders.post("/measures")
             .contentType(MediaType.APPLICATION_JSON)
             .content(body)
+            .header("Authorization", "Bearer 03284908239")
+
         val response = mockMvc.perform(request)
 
         response.andExpect(MockMvcResultMatchers.status().isOk)
